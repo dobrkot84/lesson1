@@ -1,5 +1,20 @@
 class triangle (var x1: Int, var y1: Int, var x2: Int, var y2: Int, var x3: Int, var y3: Int) {
     
 }
+import java.util.Scanner
 fun main(){
-    val figure = triangle(1, 1, 2, 2, 3, 3)
+    val scanner = Scanner(System.`in`)
+    println("Введите координату Х первой вершины треугольника: ")
+    val x1 = scanner.nextInt()
+    println("Введите координату Y первой вершины треугольника: ")
+    val y1 = scanner.nextInt()
+    println("Введите координату Х второй вершины треугольника: ")
+    val x2 = scanner.nextInt()
+    println("Введите координату Y второй вершины треугольника: ")
+    val y2 = scanner.nextInt()
+    println("Введите координату Х третьей вершины треугольника: ")
+    val x3 = scanner.nextInt()
+    println("Введите координату Y третьей вершины треугольника: ")
+    val y3 = scanner.nextInt()
+    val figure = triangle(x1, y1, x2, y2, x3, y3)
+    }

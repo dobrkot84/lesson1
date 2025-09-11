@@ -1,7 +1,33 @@
+import java.util.Scanner
+import kotlin.math.sqrt
+
 class triangle (var x1: Int, var y1: Int, var x2: Int, var y2: Int, var x3: Int, var y3: Int) {
     
+    fun distance(x1: Int, y1: Int, x2: Int, y2: Int): Double {
+        return Math.sqrt((x2 - x1).toDouble() * (x2 - x1) + 
+                         (y2 - y1) * (y2 - y1))
+    } 
+    
+    fun description () {
+       println("Задан треугольник с координатами вершин А(х=$x1, y=$y1); B(х=$x2, y=$y2); C(х=$x3, y=$y3)") 
+    
+    fun perimeter ():Double {
+        val a = distance(x1, y1, x2, y2)
+        val b = distance(x1, y1, x3, y3)
+        val c = distance(x2, y2, x3, y3)
+        return (a + b + c)
+    }
+    
+    fun square ():Double {
+        val p = perimeter() / 2
+        val a = distance(x1, y1, x2, y2)
+        val b = distance(x1, y1, x3, y3)
+        val c = distance(x2, y2, x3, y3)
+        return Math.sqrt(p * (p - a) * (p - b) * (p - c))
+    }
+
 }
-import java.util.Scanner
+
 fun main(){
     val scanner = Scanner(System.`in`)
     println("Введите координату Х первой вершины треугольника: ")
@@ -17,4 +43,7 @@ fun main(){
     println("Введите координату Y третьей вершины треугольника: ")
     val y3 = scanner.nextInt()
     val figure = triangle(x1, y1, x2, y2, x3, y3)
+    figure.description()
+    println(figure.perimeter())
+    println(figure.square())
     }

@@ -1,7 +1,9 @@
 import java.util.Scanner
 import kotlin.math.sqrt
+import kotlin.math.sin
+import kotlin.math.cos
 
-class triangle (var x1: Int, var y1: Int, var x2: Int, var y2: Int, var x3: Int, var y3: Int) {
+class triangle (var x1: Int, var y1: Int, var x2: Int, var y2: Int, var x3: Int, var y3: Int, var corner: Double) {
     
     fun distance(x1: Int, y1: Int, x2: Int, y2: Int): Double {
         return Math.sqrt((x2 - x1).toDouble() * (x2 - x1) + 
@@ -10,6 +12,14 @@ class triangle (var x1: Int, var y1: Int, var x2: Int, var y2: Int, var x3: Int,
     
     fun description () {
        println("Задан треугольник с координатами вершин А(х=$x1, y=$y1); B(х=$x2, y=$y2); C(х=$x3, y=$y3)") 
+    }
+    
+    fun kollin ():Boolean {
+        val a = distance(x1, y1, x2, y2)
+        val b = distance(x1, y1, x3, y3)
+        val c = distance(x2, y2, x3, y3)
+        return (a + b > c) && (a + c > b) && (b + c > a)
+    }
     
     fun perimeter ():Double {
         val a = distance(x1, y1, x2, y2)
@@ -24,6 +34,25 @@ class triangle (var x1: Int, var y1: Int, var x2: Int, var y2: Int, var x3: Int,
         val b = distance(x1, y1, x3, y3)
         val c = distance(x2, y2, x3, y3)
         return Math.sqrt(p * (p - a) * (p - b) * (p - c))
+    }
+    
+    fun rotate () {
+        val x0 = ((x1 + x2 + x3) / 3).toDouble()
+        val y0 = ((y1 + y2 + y3) / 3).toDouble()
+        val x11 = x1 - x0
+        val y11 = y1 - y0
+        val x21 = x2 - x0
+        val y21 = y2 - y0
+        val x31 = x3 - x0
+        val y31 = y3 - y0
+        val cornRadians = Math.toRadians(corner)
+        val x1r = x11 * cos(cornRadians) - y11 * sin(cornRadians) + x0
+        val y1r = x11 * sin(cornRadians) - y11 * cos(cornRadians) + y0
+        val x2r = x21 * cos(cornRadians) - y21 * sin(cornRadians) + x0
+        val y2r = x21 * sin(cornRadians) - y21 * cos(cornRadians) + y0
+        val x3r = x31 * cos(cornRadians) - y31 * sin(cornRadians) + x0
+        val y3r = x31 * sin(cornRadians) - y31 * cos(cornRadians) + y0
+        println("Координаты вершин после поворота треугольника на $corner градусов - А1(х=$x1r, y=$y1r); B1(х=$x2r, y=$y2r); C1(х=$x3r, y=$y3r)")
     }
 
 }
@@ -42,8 +71,13 @@ fun main(){
     val x3 = scanner.nextInt()
     println("Введите координату Y третьей вершины треугольника: ")
     val y3 = scanner.nextInt()
-    val figure = triangle(x1, y1, x2, y2, x3, y3)
+    println("Введите угол поворота")
+    val corner = scanner.nextDouble()
+    val figure = triangle(x1, y1, x2, y2, x3, y3, corner)
+    if (figure.kollin() == true) {println("Треугольник существует")}
+        else {println("Введите корректные координаты вершин!")}
     figure.description()
     println(figure.perimeter())
     println(figure.square())
+    figure.rotate()
     }

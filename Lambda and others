@@ -1,0 +1,11 @@
+import kotlin.math.pow
+
+
+fun main(){
+    4.level(4, {result -> println("Результат равен: $result")})
+}
+
+fun Int.level(degree: Int, lambda: (Double) -> Unit) {
+    val rezult = Math.pow(this.toDouble(), degree.toDouble())
+    lambda(rezult)
+    }

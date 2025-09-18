@@ -1,0 +1,11 @@
+fun main(){
+    true.displayTypeInfo()
+}
+
+fun <T> T.displayTypeInfo() {
+    when (this) {
+        is Int -> println("Это Int")
+        is String -> println("Это String")
+        else -> println("Тип у $this неизвестен")
+    }
+}

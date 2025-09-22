@@ -1,19 +1,24 @@
 fun main(){
-    true.displayTypeInfo()
+    rr.displayTypeInfo()
 }
 
 fun <T> T.displayTypeInfo() {
     when (this) {
         is Int -> println("Это Int")
         is String -> println("Это String")
-        is DataType -> displayDataTypeInfo()
+        is DataType -> this.displayDataTypeInfo()
         else -> println("Тип у $this неизвестен")
     }
 }
-    
-}
+
 sealed class DataType {
-    class DoubleType(val value: Int): DataType()
-    class UnitType(): DataType()
+    class DoubleType(val value : Double) : DataType()
+    class UnitType() : DataType()
     }
-fun DataType.displayDataTypeInfo() {
+    
+    fun DataType.displayDataTypeInfo() {
+    when (this) {
+        is DataType.DoubleType -> println("Это DoubleType со значением ${this.value}")
+        is DataType.UnitType -> println("Это Unit")
+    }
+}
